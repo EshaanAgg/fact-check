@@ -55,7 +55,7 @@ Next, you can setup the backend by running the following commands:
 
 ```sh
 # Copy the .env file
-cp .env.example .env
+cp .sample.env .env
 
 # Install the dependencies
 pip install -r requirements.txt

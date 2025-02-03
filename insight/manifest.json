@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Insight",
+  "version": "1.0.0",
+  "action": {
+    "default_title": "Insight",
+    "default_popup": "index.html",
+    "default_icon": "logo.png"
+  },
+  "icons": {},
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*/status/*"],
+      "js": ["content-script/src/main.tsx"],
+      "run_at": "document_end",
+      "media": []
+    }
+  ]
+}

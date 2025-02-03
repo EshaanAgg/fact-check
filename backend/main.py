@@ -1,6 +1,7 @@
 import os
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from cache import RedisCache
 from llm import OllamaService
@@ -16,6 +17,13 @@ class FactCheckAPI:
         self.app = FastAPI(
             title="Fact Check API",
             description="A simple API to fact-check tweets using a LLMs model & advanced RAG capabilities.",
+        )
+        self.app.add_middleware(
+            CORSMiddleware,
+            allow_credentials=True,
+            allow_origins=["*"],
+            allow_methods=["*"],
+            allow_headers=["*"],
         )
         self.cache = RedisCache(
             host=os.getenv("REDIS_HOST", "localhost"),

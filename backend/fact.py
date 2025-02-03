@@ -52,7 +52,7 @@ class FactCheckService:
         except Exception as e:
             raise ValueError(f"Failed to parse LLM response: {str(e)}")
 
-    async def check_fact(self, text: str) -> FactCheckResponse:
+    def check_fact(self, text: str) -> FactCheckResponse:
         # Check cache first
         cache_key = f"fact_check:{hash(text)}"
         cached_result = self.cache.get(cache_key)
@@ -63,8 +63,8 @@ class FactCheckService:
 
         # Generate new response if not in cache
         prompt = self._generate_prompt(text)
-        llm_response = await self.llm.generate_response(prompt)
-        print("[LLM] Response:", llm_response)
+        llm_response = self.llm.generate_response(prompt)
+        print("[LLM Response]: ", llm_response)
         result = self._parse_llm_response(llm_response)
 
         # Cache the result

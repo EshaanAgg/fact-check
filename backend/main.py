@@ -30,10 +30,10 @@ class FactCheckAPI:
     def _setup_routes(self):
 
         @self.app.post("/fact-check", response_model=FactCheckResponse)
-        async def fact_check(request: TweetRequest):
+        def fact_check(request: TweetRequest):
             print("[REQUEST]:", request.text)
             try:
-                return await self.service.check_fact(request.text)
+                return self.service.check_fact(request.text)
             except ValueError as e:
                 raise HTTPException(status_code=400, detail=str(e))
             except Exception as e:
@@ -56,7 +56,6 @@ if __name__ == "__main__":
         "main:create_app",
         host="0.0.0.0",
         port=8000,
-        reload=os.getenv("DEBUG") is not None,
         workers=1,
         factory=True,
     )

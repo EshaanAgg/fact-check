@@ -63,3 +63,9 @@ pip install -r requirements.txt
 # Run the backend server
 python main.py
 ```
+
+While debugging, you can start the server in `reload` mode to automatically restart the server on file changes:
+
+```sh
+uvicorn main:create_app --reload --host 0.0.0.0 --port 8000 --factory
+```

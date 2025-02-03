@@ -23,19 +23,20 @@ export default function App({ tweetText }: AppProps) {
 
   const makeRequest = async () => {
     setIsChecking(true);
-    const BACKEND_URL = "http://localhost:5000/fact-check";
+    const BACKEND_URL = "http://localhost:8000/fact-check";
 
     const response = await fetch(BACKEND_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tweet: tweetText }),
+      body: JSON.stringify({ text: tweetText }),
     });
 
     const data = await response.json();
     if (response.ok) setCheckResult(data);
     else console.error(data);
+
     setIsChecking(false);
   };
 

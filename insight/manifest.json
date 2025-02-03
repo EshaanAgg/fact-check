@@ -10,7 +10,7 @@
   "icons": {},
   "content_scripts": [
     {
-      "matches": ["https://twitter.com/*/status/*"],
+      "matches": ["https://twitter.com/*/status/*", "https://x.com/*/status/*"],
       "js": ["content-script/src/main.tsx"],
       "run_at": "document_end",
       "media": []

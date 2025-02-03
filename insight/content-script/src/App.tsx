@@ -52,7 +52,7 @@ export default function App({ tweetText }: AppProps) {
           spinnerPlacement="end"
           onClick={makeRequest}
         >
-          Fact-Check
+          Fact Check
         </Button>
       )}
     </div>

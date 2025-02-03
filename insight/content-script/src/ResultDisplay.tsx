@@ -36,17 +36,17 @@ const InfoComponent = (data: FactCheckResponse) => {
     <Box color={renderData[data.type]["color"]} padding="1rem">
       <Flex dir="row" align="center">
         {renderData[data.type]["icon"]}
-        <Heading size="md">{renderData[data.type]["text"]}</Heading>
+        <Heading size="sm">{renderData[data.type]["text"]}</Heading>
       </Flex>
 
       <Flex dir="row" align="center">
-        <Heading size="sm" as="span">
+        <Heading size="xs" as="span">
           Confidence:{" "}
         </Heading>
         <Progress hasStripe value={data.confidence} />
       </Flex>
 
-      <Text fontSize="sm">{data.description}</Text>
+      <Text fontSize="xs">{data.description}</Text>
     </Box>
   );
 };

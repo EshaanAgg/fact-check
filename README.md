@@ -32,7 +32,7 @@ git clone git@github.com:EshaanAgg/fact-check.git
 We make use of `Yarn 1.X` as the package manager for the project. You can install either install it from the [official website](https://yarnpkg.com/getting-started/install), or let [Volta](https://volta.sh/) manage the version of `Yarn` for you. After that you need to just install the dependencies & build the extension.
 
 ```sh
-cd frontend
+cd insight
 yarn
 yarn build
 ```

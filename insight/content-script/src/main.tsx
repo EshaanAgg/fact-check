@@ -13,12 +13,13 @@ function initializeApp() {
 
   function appendFactCheckButton() {
     setTimeout(() => {
-      const parentDiv = document.querySelector(PARENT_DIV_SELECTOR);
+      let parentDiv = document.querySelector(PARENT_DIV_SELECTOR);
 
-      if (!parentDiv) {
+      while (!parentDiv) {
         console.error("Parent div not found");
-        return;
+        parentDiv = document.querySelector(PARENT_DIV_SELECTOR);
       }
+
       if (parentDiv.children.length < 2) {
         console.error("Parent div does not have enough children", parentDiv);
         return;
@@ -42,23 +43,12 @@ function initializeApp() {
           </React.StrictMode>
         </ChakraProvider>
       );
-    }, 2000);
+
+      console.info("[INSIGHT] Succesfully added extension to tweet");
+    }, 5000);
   }
 
   appendFactCheckButton();
-
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.addedNodes.length > 0) {
-        appendFactCheckButton();
-      }
-    });
-  });
-
-  observer.observe(app, {
-    subtree: false,
-    childList: true,
-  });
 }
 
 initializeApp();

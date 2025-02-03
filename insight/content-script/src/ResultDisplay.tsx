@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Progress,
-  useToast,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, useToast, Text } from "@chakra-ui/react";
 import { CheckCircleIcon, WarningIcon, InfoIcon } from "@chakra-ui/icons";
 
 import type { FactCheckResponse } from "./App";
@@ -16,37 +8,44 @@ const SECOND = 1000;
 const InfoComponent = (data: FactCheckResponse) => {
   const renderData = {
     true: {
-      color: "green.300",
+      color: "green",
       icon: <CheckCircleIcon />,
       text: "Verified!",
     },
     false: {
-      color: "red.300",
+      color: "red",
       icon: <WarningIcon />,
       text: "False News!",
     },
     unverifiable: {
-      color: "gray.300",
+      color: "black",
       icon: <InfoIcon />,
-      text: "Unverifiable...",
+      text: "Unverifiable!",
     },
   };
 
   return (
-    <Box color={renderData[data.type]["color"]} padding="1rem">
+    <Box
+      color="white"
+      bg={renderData[data.type]["color"]}
+      p={4}
+      borderWidth="1px"
+      borderRadius="lg"
+    >
       <Flex dir="row" align="center">
         {renderData[data.type]["icon"]}
-        <Heading size="sm">{renderData[data.type]["text"]}</Heading>
-      </Flex>
-
-      <Flex dir="row" align="center">
-        <Heading size="xs" as="span">
-          Confidence:{" "}
+        <Heading size="md" p="1">
+          {renderData[data.type]["text"]}
         </Heading>
-        <Progress hasStripe value={data.confidence} />
       </Flex>
 
-      <Text fontSize="xs">{data.description}</Text>
+      <Text fontSize="md" p="1">
+        Confidence: {data.confidence}%
+      </Text>
+
+      <Text fontSize="sm" p="1">
+        {data.description}
+      </Text>
     </Box>
   );
 };
@@ -84,14 +83,14 @@ export default function ResultDisplay(props: FactCheckResponse) {
   if (props.type === "false") {
     return (
       <Button leftIcon={<WarningIcon />} colorScheme="red" onClick={onClick}>
-        False News!
+        False Facts!
       </Button>
     );
   }
 
   return (
     <Button leftIcon={<InfoIcon />} colorScheme="grey" onClick={onClick}>
-      Unverifiable...
+      Unverifiable!
     </Button>
   );
 }

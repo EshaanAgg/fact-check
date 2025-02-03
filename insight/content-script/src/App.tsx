@@ -1,8 +1,10 @@
 /// <reference types="chrome" />
 /// <reference types="vite-plugin-svgr/client" />
 
-import { Button } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
+import { Button, useToast } from "@chakra-ui/react";
+
 import ResultDisplay from "./ResultDisplay";
 
 interface AppProps {
@@ -20,24 +22,30 @@ export default function App({ tweetText }: AppProps) {
   const [checkResult, setCheckResult] = useState<FactCheckResponse | null>(
     null
   );
+  const toast = useToast();
 
   const makeRequest = async () => {
     setIsChecking(true);
     const BACKEND_URL = "http://localhost:8000/fact-check";
 
-    const response = await fetch(BACKEND_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text: tweetText }),
+    const result = await axios.post<FactCheckResponse>(BACKEND_URL, {
+      text: tweetText,
     });
 
-    const data = await response.json();
-    if (response.ok) setCheckResult(data);
-    else console.error(data);
-
-    setIsChecking(false);
+    if (result.status === 200) {
+      setCheckResult(result.data);
+      setIsChecking(false);
+    } else {
+      console.error(result.data);
+      toast({
+        title: "Error",
+        description:
+          "An error occurred while checking the fact. " + result.data,
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
   };
 
   return (

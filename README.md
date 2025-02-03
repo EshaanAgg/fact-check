@@ -43,3 +43,23 @@ After the successful build, you can load the extension in your browser:
 2. Turn on the `Developer mode` toggle switch in the top right of the window.
 3. Click the `Load unpacked` button in top left of the window.
 4. Load the `dist` directory in the project directory.
+
+### Backend
+
+The backend is built using `FastAPI` and `Python 3.10`. You also need to install:
+
+- [Redis](https://redis.io/download) for caching. Please install it on your local machine using the instructions provided on the [official website](https://redis.io/download).
+- [Ollama] for the AI models. We make use of `Mistral` for the natural language prompt generation. You can install it from the [official website](https://ollama.ai/).
+
+Next, you can setup the backend by running the following commands:
+
+```sh
+# Copy the .env file
+cp .env.example .env
+
+# Install the dependencies
+pip install -r requirements.txt
+
+# Run the backend server
+python main.py
+```
